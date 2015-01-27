@@ -1,54 +1,33 @@
 package com.castro;
 
+import java.util.List;
+
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
-public class Triangle implements ApplicationContextAware, BeanNameAware {
+public class Triangle implements ApplicationContextAware {
 
-	private Point pointA;
-	private Point pointB;
-	private Point pointC;
+	private List<Point> points;
 	private ApplicationContext context;
 	
-	public Point getPointA() {
-		return pointA;
+	public List<Point> getPoints() {
+		return points;
 	}
 	
-	public void setPointA(Point pointA) {
-		this.pointA = pointA;
-	}
-	
-	public Point getPointB() {
-		return pointB;
-	}
-	
-	public void setPointB(Point pointB) {
-		this.pointB = pointB;
-	}
-	
-	public Point getPointC() {
-		return pointC;
-	}
-	
-	public void setPointC(Point pointC) {
-		this.pointC = pointC;
+	public void setPoints(List<Point> points) {
+		this.points = points;
 	}
 	
 	public void draw() {
-		System.out.printf("Point A = (%s, %s)%n", getPointA().getX(), getPointA().getY());
-		System.out.printf("Point B = (%s, %s)%n", getPointB().getX(), getPointB().getY());
-		System.out.printf("Point C = (%s, %s)%n", getPointC().getX(), getPointC().getY());
+		for (Point point: points) {
+			System.out.printf("Point = (%s, %s)%n", point.getX(), point.getY());	
+		}
 	}
 
 	public void setApplicationContext(ApplicationContext context)
 			throws BeansException {
 		System.out.printf("ApplicationContext is %s%n", context);
 		this.context = context;
-	}
-
-	public void setBeanName(String beanName) {
-		System.out.printf("Bean name is %s%n", beanName);
 	}
 }
